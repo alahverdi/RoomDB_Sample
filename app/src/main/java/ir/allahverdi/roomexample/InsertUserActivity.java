@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class InsertUserActivity extends AppCompatActivity {
 
-    EditText et_firsrName,
+    EditText et_firstName,
             et_lastName,
             et_email,
             et_phone;
@@ -23,7 +23,7 @@ public class InsertUserActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        et_firsrName = findViewById(R.id.et_firsrName);
+        et_firstName = findViewById(R.id.et_firsrName);
         et_lastName = findViewById(R.id.et_lastName);
         et_email = findViewById(R.id.et_email);
         et_phone = findViewById(R.id.et_phone);
