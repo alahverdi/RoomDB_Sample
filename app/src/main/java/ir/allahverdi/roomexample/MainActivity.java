@@ -7,21 +7,32 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.allahverdi.roomexample.adapter.AdapterListview;
 import ir.allahverdi.roomexample.database.MyRoomDb;
 import ir.allahverdi.roomexample.entity.User;
 
 public class MainActivity extends AppCompatActivity {
 
     List<User> list = new ArrayList<>();
+    AdapterListview adapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initViews();
+    }
+
+    private void initViews() {
+        listView = findViewById(R.id.listView);
     }
 
     @Override
