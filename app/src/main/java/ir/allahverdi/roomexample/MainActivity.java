@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Adapter;
@@ -20,6 +21,8 @@ import ir.allahverdi.roomexample.entity.User;
 public class MainActivity extends AppCompatActivity {
 
     List<User> list = new ArrayList<>();
+    User user = new User();
+
     AdapterListview adapter;
     ListView listView;
 
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                list = MyRoomDb.getInstance(MainActivity.this)
+                list = (List<User>) MyRoomDb.getInstance(MainActivity.this)
                         .userDAO()
                         .getAll();
             }
@@ -62,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectFromDb() {
-        adapter = new AdapterListview(this, (ArrayList<User>) getDataFromDb());
+        Log.e("TAG", "\n\nselectFromDb: \n\n" + list);
+        adapter = new AdapterListview(this, (ArrayList<User>) list);
         listView.setAdapter(adapter);
     }
 }
