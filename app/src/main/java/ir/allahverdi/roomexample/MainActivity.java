@@ -23,7 +23,6 @@ import ir.allahverdi.roomexample.entity.User;
 public class MainActivity extends AppCompatActivity {
 
     List<User> list = new ArrayList<>();
-    User user = new User();
 
     AdapterListview adapter;
     ListView listView;
