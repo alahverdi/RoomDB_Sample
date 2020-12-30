@@ -2,9 +2,16 @@ package ir.allahverdi.roomexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.nio.channels.AsynchronousByteChannel;
+
+import ir.allahverdi.roomexample.database.MyRoomDb;
+import ir.allahverdi.roomexample.entity.User;
 
 public class InsertUserActivity extends AppCompatActivity {
 
@@ -20,6 +27,28 @@ public class InsertUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_user);
 
         initViews();
+
+        btn_insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // insert user into RoomDb
+                User user = new User();
+
+                user.setFirstName(et_firstName.getText().toString().trim());
+                user.setLastName(et_lastName.getText().toString().trim());
+                user.setEmail(et_email.getText().toString().trim());
+                user.setPhoneNumber(Long.valueOf(et_phone.getText().toString().trim()));
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        MyRoomDb.getInstance(InsertUserActivity.this)
+                                .userDAO()
+                                .insert(user);
+                    }
+                });
+            }
+        });
     }
 
     private void initViews() {

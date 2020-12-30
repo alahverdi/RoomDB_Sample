@@ -14,7 +14,7 @@ public abstract class MyRoomDb extends RoomDatabase {
 
     private static volatile MyRoomDb INSTANCE;
 
-    static MyRoomDb getInstance(Context context) {
+    public static MyRoomDb getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (MyRoomDb.class) {
                 if (INSTANCE == null) {
