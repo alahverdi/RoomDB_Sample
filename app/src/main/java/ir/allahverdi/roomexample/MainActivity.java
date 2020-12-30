@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
+import ir.allahverdi.roomexample.entity.User;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,5 +30,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private List<User> getDataFromDb() {
+        return null;
     }
 }
