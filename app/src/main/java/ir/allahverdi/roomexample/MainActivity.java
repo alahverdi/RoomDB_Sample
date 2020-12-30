@@ -3,6 +3,7 @@ package ir.allahverdi.roomexample;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
-        selectFromDb();
+        new MyAsync().execute();
     }
-
     private void initViews() {
         listView = findViewById(R.id.listView);
     }
@@ -52,21 +53,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private List<User> getDataFromDb() {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                list = (List<User>) MyRoomDb.getInstance(MainActivity.this)
-                        .userDAO()
-                        .getAll();
-            }
-        });
-        return list;
+    class MyAsync extends AsyncTask<Void,Void,List<User>> {
+
+        @Override
+        protected List<User> doInBackground(Void... voids) {
+            list = (List<User>) MyRoomDb.getInstance(MainActivity.this)
+                    .userDAO()
+                    .getAll();
+            return list;
+        }
+
+        @Override
+        protected void onPostExecute(List<User> users) {
+            super.onPostExecute(users);
+            adapter = new AdapterListview(MainActivity.this, (ArrayList<User>) list);
+            listView.setAdapter(adapter);
+        }
     }
 
-    private void selectFromDb() {
-        Log.e("TAG", "\n\nselectFromDb: \n\n" + list);
-        adapter = new AdapterListview(this, (ArrayList<User>) list);
-        listView.setAdapter(adapter);
-    }
 }
