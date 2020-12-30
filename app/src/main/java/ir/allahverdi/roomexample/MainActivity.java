@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+        selectFromDb();
     }
 
     private void initViews() {
@@ -58,5 +59,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return list;
+    }
+
+    private void selectFromDb() {
+        adapter = new AdapterListview(this, (ArrayList<User>) getDataFromDb());
+        listView.setAdapter(adapter);
     }
 }
