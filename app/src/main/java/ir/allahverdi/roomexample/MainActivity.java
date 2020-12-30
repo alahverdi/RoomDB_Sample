@@ -34,8 +34,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         new MyAsync().execute();
     }
+
     private void initViews() {
         listView = findViewById(R.id.listView);
     }
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    class MyAsync extends AsyncTask<Void,Void,List<User>> {
+    class MyAsync extends AsyncTask<Void, Void, List<User>> {
 
         @Override
         protected List<User> doInBackground(Void... voids) {
