@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.nio.channels.AsynchronousByteChannel;
 
@@ -47,6 +48,8 @@ public class InsertUserActivity extends AppCompatActivity {
                                 .insert(user);
                     }
                 });
+                Toast.makeText(InsertUserActivity.this, "insert", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
